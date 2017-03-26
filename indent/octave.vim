@@ -46,9 +46,9 @@ function GetOctaveIndent(lnum)
     " See if this line does not follow the line right after an openblock
     if getline(plnum) =~ '^\s*\(function\|for\|do\|while\|if\|else\|elseif\|case\|switch\|try\|otherwise\|catch\)\>'
       " See if the user has already dedented
-    elseif indent(v:lnum) > curind - &sw
+    elseif indent(v:lnum) > curind - shiftwidth()
       " If not, recommend one dedent
-      let curind = curind - &sw
+      let curind = curind - shiftwidth()
     else
       " Otherwise, trust the user
       return -1
@@ -58,9 +58,9 @@ function GetOctaveIndent(lnum)
     " If the previous line opened a block
   elseif getline(plnum) =~ '^\s*\(function\|for\|do\|if\|else\|elseif\|case\|while\|switch\|try\|otherwise\|catch\)\>'
     " See if the user has already indented
-    if indent(v:lnum) < curind + &sw
+    if indent(v:lnum) < curind + shiftwidth()
       "If not, recommend indent
-      let curind = curind + &sw
+      let curind = curind + shiftwidth()
     else
       " Otherwise, trust the user
       return -1
